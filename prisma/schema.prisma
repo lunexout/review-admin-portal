@@ -1,0 +1,223 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions", "relationJoins", "prismaSchemaFolder"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [citext]
+}
+
+model Role {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  permissions String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  users       User[]
+}
+
+model User {
+  id            String     @id @default(cuid())
+  email         String     @unique
+  name          String
+  image         String?
+  password      String?
+  emailVerified DateTime?
+  roleId        String
+  role          Role       @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  status        UserStatus @default(ACTIVE)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  accounts      Account[]
+
+  admin          Admin?
+  businessAdmin  BusinessAdmin?
+  businessCTO    BusinessCTO?
+  businessMember BusinessMember?
+  visitor        Visitor?
+
+  recommendations BusinessRecommended[]
+  reviews         BusinessReview[]
+  visits          BusinessVisitLog[]
+  sessions        Session[]
+}
+
+model Admin {
+  userId String @id
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model BusinessAdmin {
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @id
+}
+
+model BusinessCTO {
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @id
+}
+
+model BusinessMember {
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @id
+}
+
+model Visitor {
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @id
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  provider          String
+  providerAccountId String
+  type              String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  userId            String
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  expires      DateTime
+  sessionToken String
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model BusinessReview {
+  id         String   @id @default(cuid())
+  rating     Int
+  comment    String?
+  reviewerId String
+  businessId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  reviewer   User     @relation(fields: [reviewerId], references: [id], onDelete: Cascade)
+}
+
+model BusinessVisitLog {
+  id         String   @id @default(cuid())
+  businessId String
+  visitorId  String
+  visitedAt  DateTime @default(now())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  visitor    User     @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+
+  @@unique([visitorId, businessId])
+}
+
+model BusinessAddress {
+  id           String   @id @default(cuid())
+  address      String
+  latitude     Float
+  longitude    Float
+  googleMapUrl String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  businessId   String
+  business     Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@unique([latitude, longitude, address])
+}
+
+model BusinessRecommended {
+  id         String   @id @default(cuid())
+  userId     String
+  businessId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model BusinessSocialMedia {
+  id         String                  @id @default(cuid())
+  type       BusinessSocialMediaType
+  link       String
+  businessId String
+  createdAt  DateTime                @default(now())
+  updatedAt  DateTime                @updatedAt
+  business   Business                @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@unique([businessId, type])
+}
+
+model BusinessGalleryImage {
+  id         String   @id @default(cuid())
+  image      String
+  altText    String?
+  caption    String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  businessId String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+}
+
+model Business {
+  id              String                 @id @default(cuid())
+  name            String                 @unique
+  description     String?
+  types           BusinessType[]
+  services        BusinessService[]
+  priceTier       BusinessPriceTier[]
+  icon            String?
+  banner          String?
+  contacts        String[]
+  qrCode          String?
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
+  addresses       BusinessAddress[]
+  gallery         BusinessGalleryImage[]
+  recommendations BusinessRecommended[]
+  reviews         BusinessReview[]
+  socialMedia     BusinessSocialMedia[]
+  visits          BusinessVisitLog[]
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  PENDING
+}
+
+enum BusinessType {
+  SALON
+}
+
+enum BusinessService {
+  HAIR
+  BEARD
+  NAIL
+  TATTOO
+  EYEBROW_EYELASH
+  EPILATION
+  POTOX
+  PIERCING
+}
+
+enum BusinessPriceTier {
+  LOW
+  NORMAL
+  HIGH
+  LUXURY
+}
+
+enum BusinessSocialMediaType {
+  FACEBOOK
+  INSTAGRAM
+  TIKTOK
+}

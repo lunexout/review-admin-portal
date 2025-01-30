@@ -1,0 +1,177 @@
+{
+  "SignInPage": {
+    "page_title": "Sign in"
+  },
+  "HomePage": {
+    "title": "Hello world!",
+    "about": "Go to the about page"
+  },
+  "SingleFieldSearch": {
+    "search_by_name": "Search by name"
+  },
+  "BusinessesTableToolbar": {
+    "search_placeholder": "Search business",
+    "create_business": "Create business",
+    "services": {
+      "hair": "Hair",
+      "beard": "Beard",
+      "epilation": "Epilation",
+      "nail": "Nail art",
+      "piercing": "Piercing",
+      "tattoo": "Tattoo",
+      "eyebrow_eyelash": "Eyebrow/Eyelash",
+      "potox": "Potox"
+    },
+    "prices": {
+      "low": "Low (10 - 30) GEL",
+      "normal": "Normal (30 - 100) GEL",
+      "high": "High (100 - 200) GEL",
+      "luxury": "Luxury (200+) GEL"
+    }
+  },
+  "UsersTableToolbar": {
+    "search_placeholder": "Search business",
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive",
+    "PENDING": "Pending"
+  },
+  "DataTableFacetedFilter": {
+    "no_results_found": "No results found",
+    "clear_filters": "Clear filters"
+  },
+  "CreateBusinessForm": {
+    "creating_business": "Creating Business",
+    "create": "Create",
+    "errors": {
+      "unique_constraint_failed:[name]": "A business with the same name already exists."
+    }
+  },
+  "FormErrorAlert": {
+    "general_error_message": "Something went wrong"
+  },
+  "SelectBusinessServices": {
+    "services": "Services",
+    "hair": "Hair",
+    "beard": "Beard",
+    "epilation": "Epilation",
+    "nail": "Nail art",
+    "piercing": "Piercing",
+    "tattoo": "Tattoo",
+    "eyebrow_eyelash": "Eyebrow/Eyelash",
+    "potox": "Potox",
+    "placeholder": "Select services"
+  },
+  "BusinessMapPage": {},
+  "BusinessDetailsPage": {
+    "no_business_banner_uploaded": "No business banner uploaded",
+    "business_created": "Business created.",
+    "tabs": {
+      "information": "Information",
+      "map": "Map",
+      "types": "Types",
+      "services": "Services",
+      "prices": "Prices"
+    }
+  },
+  "BusinessInformationPage": {
+    "types": "Types",
+    "services": "Services",
+    "prices": "Prices",
+    "addresses": "Addresses",
+    "description": "Description"
+  },
+  "BusinessNotFound": {
+    "business_not_found": "Business not found",
+    "back_to_businesses": "Back to businesses"
+  },
+  "SelectBusinessPriceTiers": {
+    "price_tiers": "Prices",
+    "placeholder": "Select prices",
+    "low": "Low (10 - 30) GEL",
+    "normal": "Normal (30 - 100) GEL",
+    "high": "High (100 - 200) GEL",
+    "luxury": "Luxury (200+) GEL"
+  },
+  "SelectBusinessTypes": {
+    "types": "Types",
+    "salon": "Salon",
+    "placeholder": "Select types"
+  },
+  "MultiSelect": {
+    "select_options": "Select options",
+    "search": "Sarch",
+    "no_item_found": "No item found"
+  },
+  "PreventNavigation": {
+    "title": "Discard changes",
+    "subtitle": "Changes you have made, will be lost.",
+    "cancel": "Cancel",
+    "discard_changes": "Discard changes"
+  },
+  "BusinessFormFields": {
+    "field_label_name": "Name",
+    "field_label_description": "Description"
+  },
+  "DialogCloseButton": {
+    "cancel": "Cancel",
+    "close": "Close"
+  },
+  "AlertDialogCancelButton": {
+    "cancel": "Cancel",
+    "close": "Close"
+  },
+  "DialogDeleteButton": {
+    "deleting": "Deleting",
+    "delete": "Delete"
+  },
+  "DialogCreateButton": {
+    "create": "Create",
+    "creating": "Creating"
+  },
+  "DialogSaveButton": {
+    "save": "Save"
+  },
+  "DataTableResetFiltersButton": {
+    "reset": "Reset"
+  },
+  "FormDescriptionInput": {
+    "characters_used": "{input} of {max} characters are used."
+  },
+  "BusinessesTable": {
+    "columns": {
+      "name": "Name",
+      "types": "Types",
+      "services": "Services",
+      "prices": "Prices",
+      "addresses": "Addresses",
+      "created_at": "Created at",
+      "updated_at": "Updated at"
+    }
+  },
+  "UsersTable": {
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "created_at": "Created at"
+    }
+  },
+  "UserStatuses": {
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive",
+    "PENDING": "Pending"
+  },
+  "DataTablePagination": {
+    "rows_per_page": "Rows per page",
+    "go_to_previous_page": "Go to previous page",
+    "go_to_first_page": "Go to first page",
+    "go_to_next_page": "Go to next page",
+    "go_to_last_page": "Go to last page",
+    "rows_of_total": "{start}-{end} of {total}"
+  },
+  "NoResultsFoundContent": {
+    "no_results_found": "No results found",
+    "try_different_search_filters": "Try different search filters"
+  }
+}
